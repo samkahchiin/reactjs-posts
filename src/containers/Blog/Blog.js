@@ -13,8 +13,8 @@ class Blog extends Component {
     }
 
     componentDidMount() {
-      axios.get("/posts").
-        then(response => {
+      axios.get("/posts")
+        .then(response => {
           const posts = response.data.slice(0,4);
           const updatedPost = posts.map(post => {
             return {
@@ -50,17 +50,23 @@ class Blog extends Component {
       }
 
       return (
-          <div>
-              <section className="Posts">
-                {posts}
-              </section>
-              <section>
-                  <FullPost id={this.state.selectedPostId}/>
-              </section>
-              <section>
-                  <NewPost />
-              </section>
-          </div>
+        <div className="Blog">
+          <header>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/new-post">New Post</a></li>
+            </ul>
+          </header>
+          <section className="Posts">
+            {posts}
+          </section>
+          <section>
+            <FullPost id={this.state.selectedPostId}/>
+          </section>
+          <section>
+            <NewPost />
+          </section>
+        </div>
       );
     }
 }

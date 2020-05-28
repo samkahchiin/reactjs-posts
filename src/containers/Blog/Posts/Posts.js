@@ -5,7 +5,8 @@ import './Posts.css';
 
 class Posts extends Component {
   state = {
-    posts: []
+    posts: [],
+    error: false
   }
 
   componentDidMount() {

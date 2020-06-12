@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Posts from './Posts/Posts';
 import NewPost from './NewPost/NewPost';
-import FullPost from './FullPost/FullPost';
 import { Route, NavLink, Switch } from 'react-router-dom';
 import './Blog.css';
 
@@ -11,7 +10,7 @@ class Blog extends Component {
       <div className="Blog">
         <header>
           <ul>
-            <li><NavLink to="/" exact>Home</NavLink></li>
+            <li><NavLink to="/posts/" exact>Home</NavLink></li>
             <li><NavLink to={{
               pathname: '/new-post',
               hash: '#submit',
@@ -24,10 +23,12 @@ class Blog extends Component {
         <Route path="/" render={() => <h1>Home 2</h1>} /> */}
 
         {/* Switch ensure that only route is rendered */}
+        {/* Switch is removable, just keep it here for reference*/}
         <Switch>
-          <Route path="/" exact component={Posts} />
           <Route path="/new-post" component={NewPost} />
-          <Route path="/:id" component={FullPost} />
+
+          {/* This route must match its nested route as well*/}
+          <Route path="/posts" component={Posts} />
         </Switch>
 
       </div>

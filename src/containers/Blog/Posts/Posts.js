@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Post from '../../../components/Post/Post';
-import { Link } from 'react-router-dom';
+import FullPost from '../FullPost/FullPost';
+import { Route } from 'react-router-dom';
 import axios from '../../../axios';
 import './Posts.css';
 
@@ -36,7 +37,7 @@ class Posts extends Component {
     // the user to another route
     // NOTE: It have to be rendered by the React router
     // You can alos use <Redirect /> components
-    this.props.history.push('/' + id)
+    this.props.history.push('/posts/' + id)
   }
 
   render() {
@@ -54,9 +55,12 @@ class Posts extends Component {
     }
 
     return (
-      <section className="Posts">
-        {posts}
-      </section>
+      <div>
+        <section className="Posts">
+          {posts}
+        </section>
+        <Route path={this.props.match.url + '/:id'} exact component={FullPost} />
+      </div>
     )
   }
 }

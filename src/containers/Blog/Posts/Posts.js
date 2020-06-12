@@ -11,6 +11,7 @@ class Posts extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     axios.get("/posts")
       .then(response => {
         const posts = response.data.slice(0,4);
@@ -31,9 +32,11 @@ class Posts extends Component {
   }
 
   postSelectedHandler = (id) => {
-    this.setState({
-      selectedPostId: id
-    })
+    // history.push will pushes a new entry into the history stack => redirecting
+    // the user to another route
+    // NOTE: It have to be rendered by the React router
+    // You can alos use <Redirect /> components
+    this.props.history.push('/' + id)
   }
 
   render() {
@@ -41,12 +44,11 @@ class Posts extends Component {
     if (!this.state.error) {
       posts = this.state.posts.map(post => {
         return (
-          <Link to={'/' + post.id} key={post.id}>
-            <Post
-              title={post.title}
-              author={post.author}
-              clicked={() => this.postSelectedHandler(post.id)}/>
-          </Link>
+          <Post
+            key={post.id}
+            title={post.title}
+            author={post.author}
+            clicked={() => this.postSelectedHandler(post.id)}/>
         )
       });
     }
